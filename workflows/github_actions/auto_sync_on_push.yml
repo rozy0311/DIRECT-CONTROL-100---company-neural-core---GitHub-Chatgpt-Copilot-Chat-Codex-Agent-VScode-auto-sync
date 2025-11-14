@@ -1,0 +1,8 @@
+name: Auto Sync – Push
+on: { push: { branches: ["main"] } }
+jobs:
+  autosync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "sync ok"

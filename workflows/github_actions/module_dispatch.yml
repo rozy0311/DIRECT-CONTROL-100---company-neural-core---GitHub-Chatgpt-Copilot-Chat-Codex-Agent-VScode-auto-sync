@@ -1,0 +1,12 @@
+name: Module Dispatcher
+on:
+  workflow_dispatch:
+    inputs:
+      module: { type: choice, options: [bookkeeping, payroll, sales, marketing] }
+jobs:
+  run_l6:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run L6 orchestrator
+        run: python ai/l6_orchestrator.py ${{ inputs.module }}

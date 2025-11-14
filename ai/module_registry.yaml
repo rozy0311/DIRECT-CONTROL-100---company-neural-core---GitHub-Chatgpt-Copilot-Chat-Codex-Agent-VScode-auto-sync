@@ -1,10 +1,17 @@
 modules:
   - id: bookkeeping
-    name: Bookkeeping & Tax Prep
-    description: 'Local bookkeeping pipeline.'
+    os_doc: business/bookkeeping/bookkeeping_os.md
+    config: config/bookkeeping.yaml
+    scripts_path: ../bookkeeping_repo_v5_1/scripts/bookkeeping/
   - id: payroll
-    name: Payroll & Contractors
+    os_doc: business/payroll/payroll_os.md
+    config: config/payroll.yaml
+    scripts_path: scripts/payroll/
   - id: sales
-    name: Sales
+    os_doc: business/sales/sales_os.md
+    config: config/sales.yaml
+    scripts_path: scripts/sales/
   - id: marketing
-    name: Marketing
+    os_doc: business/marketing/marketing_os.md
+    config: config/marketing.yaml
+    scripts_path: scripts/marketing/
