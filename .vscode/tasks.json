@@ -1,1 +1,15 @@
-{ "version": "2.0.0", "tasks": [] }
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "brain:auto-sync",
+      "type": "shell",
+      "command": "python scripts/auto_sync/safe_push.py",
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
