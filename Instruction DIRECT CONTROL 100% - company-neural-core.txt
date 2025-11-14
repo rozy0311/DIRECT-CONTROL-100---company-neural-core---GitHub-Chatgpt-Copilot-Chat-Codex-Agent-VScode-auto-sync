@@ -1,0 +1,37 @@
+NEURAL_CORE_REPO_SETUP
+
+
+Repo 2: https://github.com/rozy0311/DIRECT-CONTROL-100---company-neural-core---GitHub-Chatgpt-Copilot-Chat-Codex-Agent-VScode-auto-sync.git (neural core)
+
+neural_core_repo/
+├── ai/
+│   ├── ai_state_graph.json
+│   ├── ai_ruleset.yaml
+│   └── module_registry.yaml
+│
+├── business/
+│   ├── _TEMPLATE_OS.md
+│   ├── bookkeeping/
+│   │   └── bookkeeping_os.md
+│   ├── payroll/
+│   │   └── .gitkeep
+│   ├── sales/
+│   │   └── .gitkeep
+│   └── marketing/
+│       └── .gitkeep
+│
+├── config/
+│   ├── global.yaml
+│   └── bookkeeping.yaml
+│
+├── scripts/
+│   └── auto_sync/
+│       ├── safe_push.py
+│       └── .gitkeep
+│
+├── workflows/
+│   └── github_actions/
+│       └── bookkeeping_pipeline.yml
+│
+└── .vscode/
+    └── tasks.json
