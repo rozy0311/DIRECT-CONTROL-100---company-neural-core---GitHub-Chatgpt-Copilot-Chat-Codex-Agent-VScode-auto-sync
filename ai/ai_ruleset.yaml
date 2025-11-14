@@ -1,0 +1,15 @@
+level: L6
+guardrails:
+  no_direct_system_writes: true
+  no_production_without_approval: true
+  audit_required: true
+modules:
+  bookkeeping:
+    os_doc: business/bookkeeping/bookkeeping_os.md
+    config: config/bookkeeping.yaml
+  payroll:
+    os_doc: business/payroll/payroll_os.md
+  sales:
+    os_doc: business/sales/sales_os.md
+  marketing:
+    os_doc: business/marketing/marketing_os.md

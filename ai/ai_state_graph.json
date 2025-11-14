@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "states": ["observe","diagnose","plan","approve","execute","audit"],
+  "transitions": {
+    "observe": "diagnose",
+    "diagnose": "plan",
+    "plan": "approve",
+    "approve": "execute",
+    "execute": "audit",
+    "audit": "observe"
+  }
+}

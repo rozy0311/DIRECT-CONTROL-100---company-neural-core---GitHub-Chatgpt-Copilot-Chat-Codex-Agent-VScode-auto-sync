@@ -1,0 +1,10 @@
+modules:
+  - id: bookkeeping
+    name: Bookkeeping & Tax Prep
+    description: 'Local bookkeeping pipeline.'
+  - id: payroll
+    name: Payroll & Contractors
+  - id: sales
+    name: Sales
+  - id: marketing
+    name: Marketing

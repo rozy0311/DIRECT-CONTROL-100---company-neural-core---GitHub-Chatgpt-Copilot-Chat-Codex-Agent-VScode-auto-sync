@@ -1,0 +1,11 @@
+# General OS cruft
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code user settings not meant for repo
+.vscode/*.code-workspace
+.vscode/settings.json
