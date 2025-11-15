@@ -401,4 +401,131 @@ Bạn không chạy mấy bước kiểm tra trước đó thì vẫn ok, chỉ 
 
 Nếu bật auto-sync ở repo chứa dữ liệu thật, hãy chắc .gitignore chặn data/**, *.csv, *.xlsx, *.pdf, .env, secrets/. Không muốn sáng mai repo thành bảo tàng sao kê.
 
+
 Thế thôi. Mở diff, bấm Actions chạy một phát. Khi nào cần nghiêm túc hơn mới thêm lint/tests.
+
+Reviewed the diff to highlight the major drops and outlined how you can manually kick the neural-core workflows.
+
+actions taken
+Opened neural_core_repo_l6_upgrade.diff and skimmed the requested hotspots:
+.vscode/tasks.json now adds auto-pull, auto-push, and reuses brain:auto-sync to keep repos in sync automatically.
+scripts/auto_sync/* introduces auto_pull, auto_merge, watchdog.py, plus config.yaml with branch protections and timing knobs.
+New ai/* suite (orchestrator, guardrails, validators, approvals) plus governance helpers under scripts/ai/*, giving state-machine execution with schema/risk checks.
+Business OS docs (business/*_os.md) now describe pipelines, scope, inputs/outputs so the healthcheck can assert coverage.
+scripts/health/module_healthcheck.py and the three GitHub workflows (l6_validation.yml, module_healthcheck.yml, auto_sync_guard.yml) enforce governance, module coverage, and branch protection.
+workflow triggers
+I can’t dispatch GitHub Actions directly from here because there’s no authenticated GitHub CLI/GUI access in this environment, but you can trigger them immediately using either route below:
+GitHub UI: Repo → Actions tab → pick each workflow (“L6 Governance Validation”, “Module Healthcheck”, “Bookkeeping Pipeline”) → “Run workflow”. For Bookkeeping Pipeline, select any period input (e.g., 2023-2024).
+GitHub CLI (if gh is configured locally):
+
+gh workflow run "L6 Governance Validation" -R USER/REPOgh workflow run "Module Healthcheck" -R USER/REPOgh workflow run "Bookkeeping Pipeline" -R USER/REPO -f period=2023-2024
+Once you trigger them, keep an eye on the Actions tab to confirm they start cleanly and catch any config typos early.
+Let me know if you’d like me to replicate this automation into another repo or dig deeper into any of the workflows.
+
+Bạn làm đúng rồi. Giờ làm ngay 6 bước ngắn gọn dưới đây để mọi thứ chạy và có tín hiệu “xanh” rõ ràng. Không vòng vo.
+
+1) Kéo code mới về 2 repo
+# Bookkeeping repo (local, có dữ liệu thật)
+git fetch --all && git checkout main && git pull
+
+# Neural-core repo (não doanh nghiệp)
+git fetch --all && git checkout main && git pull
+
+
+Xác nhận thấy 2 commit:
+
+Bookkeeping: 464aa63
+
+Neural-core: 01d1a5a
+
+2) Bật auto-sync ở neural-core trong VSCode
+
+Mở repo neural-core bằng VSCode.
+
+Nếu VSCode hỏi chạy task nền, chọn Allow/Always.
+
+Không thấy hỏi thì tự chạy: Terminal → Run Task → brain:auto-sync.
+Từ giờ sửa file logic trong ai/, business/, scripts/, config/, workflows/ là nó tự commit + push. Dữ liệu thật không bị đẩy nếu .gitignore chuẩn.
+
+3) Chạy GitHub Actions ngay (neural-core)
+
+Trên GitHub UI (repo neural-core) → tab Actions:
+
+Run L6 Governance Validation
+
+Run Module Healthcheck
+
+Run Bookkeeping Pipeline và nhập period: 2023-2024
+
+Nếu có gh trên máy:
+
+gh workflow run "L6 Governance Validation"
+gh workflow run "Module Healthcheck"
+gh workflow run "Bookkeeping Pipeline" -f period=2023-2024
+
+
+Mở tab Actions xem log có chạy sạch không. Nếu fail, đọc dòng lỗi đầu tiên trong job để sửa đúng chỗ (thường là thiếu file, sai path, hoặc thiếu Python).
+
+4) Chạy pipeline bookkeeping với dữ liệu thật (local)
+
+Trong repo bookkeeping:
+
+python scripts/bookkeeping/run_all.py --config config/bookkeeping.yaml --period 2023-2024
+python scripts/bookkeeping/summary_audit.py
+
+
+Xong thì kiểm tra:
+
+out/bookkeeping/reconcile_report.json
+
+out/bookkeeping/summary_audit.md
+
+Nếu có out/bookkeeping/need_human_input.yaml thì mở file đó, điền mapping cho các giao dịch “unknown”, rồi chạy lại lệnh trên.
+
+5) Khóa an toàn dữ liệu
+
+Mở .gitignore ở cả hai repo và đảm bảo có mấy dòng này:
+
+data/
+**/data/
+*.csv
+*.xlsx
+*.pdf
+*.env
+secrets/
+keys/
+tokens/
+
+
+Thiếu là tự thêm ngay, trước khi auto-sync đẩy nhầm dữ liệu thật lên trời.
+
+6) Dấu hiệu “xanh” để biết bạn đã xong vòng đầu
+
+Neural-core: 2 workflow đầu chạy Success.
+
+Bookkeeping: summary_audit.md sinh ra, reconcile_report.json có pass: true hoặc delta nhỏ hơn ngưỡng.
+
+Không còn need_human_input.yaml hoặc số lượng “unknown” giảm theo mỗi lần bạn điền.
+
+Nếu đụng lỗi phổ biến
+
+ModuleNotFoundError / pandas không có: cài môi trường
+
+pip install pandas pyyaml pyarrow
+
+
+Sai cột số tiền: sửa validate_and_audit.py cho đúng tên cột amount theo file bank của bạn (có thể phải cộng Credit - Debit).
+
+Auto-sync không chạy: mở lại VSCode task brain:auto-sync.
+
+Actions không xuất hiện: push mới gần nhất chưa lên đúng repo hoặc branch không phải main.
+
+Khi muốn mở rộng hoặc sao chép automation sang repo khác
+
+Copy từ neural-core: ai/, business/*_os.md, scripts/auto_sync/, .vscode/tasks.json, workflows/github_actions/*, config/global.yaml.
+
+Sửa ai/ai_ruleset.yaml để thêm module mới vào modules:.
+
+Commit: chore: bootstrap L6 orchestration + auto-sync.
+
+Xong. Làm đúng 6 bước trên là chạy được. Nếu cái gì lăn đùng ra chết, quăng cái log hoặc file lỗi vào đây, tôi mổ nguyên nhân cho.
