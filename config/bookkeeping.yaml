@@ -1,2 +1,4 @@
 module: bookkeeping
+owner: controller
+version: "1.0"
 enabled: true

@@ -1,0 +1,56 @@
+name: Auto Sync Guard
+
+on:
+  push:
+    branches:
+      - main
+      - production
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate auto-sync protections
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+          python - <<'PY'
+          import os
+          import pathlib
+          import sys
+          import yaml
+
+          workspace = os.environ.get("GITHUB_WORKSPACE")
+          repo_root = pathlib.Path(workspace) if workspace else pathlib.Path.cwd()
+          config_path = repo_root / "scripts" / "auto_sync" / "config.yaml"
+
+          if not config_path.exists():
+              print("Auto-sync config missing")
+              sys.exit(1)
+
+          with config_path.open("r", encoding="utf-8") as handle:
+              config = yaml.safe_load(handle) or {}
+
+          protected = set(config.get("protected_branches", []))
+          branch = os.environ.get("BRANCH_NAME")
+
+          if not branch:
+              print("Branch name not found in environment")
+              sys.exit(1)
+
+          if branch not in protected:
+              print(f"Branch {branch} is not protected in auto-sync config")
+              sys.exit(1)
+
+          print(f"Branch {branch} is covered by auto-sync guardrails")
+          PY

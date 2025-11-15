@@ -9,3 +9,14 @@ __pycache__/
 # VS Code user settings not meant for repo
 .vscode/*.code-workspace
 .vscode/settings.json
+
+# Sensitive or large data artifacts
+data/
+**/data/
+*.csv
+*.xlsx
+*.pdf
+*.env
+secrets/
+keys/
+tokens/

@@ -1,2 +1,4 @@
 module: sales
+owner: revenue
+version: "1.0"
 enabled: true

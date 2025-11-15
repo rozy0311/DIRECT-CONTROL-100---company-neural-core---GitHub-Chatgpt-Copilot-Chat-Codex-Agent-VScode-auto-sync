@@ -1,2 +1,4 @@
 module: payroll
+owner: people_ops
+version: "1.0"
 enabled: true

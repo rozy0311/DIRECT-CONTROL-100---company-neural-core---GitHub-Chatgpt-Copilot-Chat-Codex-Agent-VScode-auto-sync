@@ -1,2 +1,4 @@
 module: marketing
+owner: growth
+version: "1.0"
 enabled: true
