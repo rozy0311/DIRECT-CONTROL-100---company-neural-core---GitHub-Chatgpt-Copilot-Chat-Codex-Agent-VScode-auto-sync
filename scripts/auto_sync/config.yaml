@@ -1,0 +1,6 @@
+auto_push: true
+auto_pull: true
+watch_interval: 10
+protected_branches:
+  - main
+  - production

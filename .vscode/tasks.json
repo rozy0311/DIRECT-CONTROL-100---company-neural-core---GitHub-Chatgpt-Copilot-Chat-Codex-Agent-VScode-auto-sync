@@ -2,14 +2,24 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "brain:auto-sync",
+      "label": "auto-pull",
+      "type": "shell",
+      "command": "git pull --rebase --autostash || true",
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "auto-push",
       "type": "shell",
       "command": "python scripts/auto_sync/safe_push.py",
+      "runOptions": { "runOn": "default" }
+    },
+    {
+      "label": "brain:auto-sync",
+      "type": "shell",
       "isBackground": true,
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
-      "problemMatcher": []
+      "command": "python scripts/auto_sync/watchdog.py",
+      "problemMatcher": [],
+      "runOptions": { "runOn": "folderOpen" }
     }
   ]
 }
