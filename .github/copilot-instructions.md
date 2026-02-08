@@ -1,146 +1,200 @@
-﻿# Copilot Instructions â€” EMADS-PR Enterprise Multi-Agent System
+﻿# Copilot Instructions — EMADS-PR Enterprise Multi-Agent System
 
-> Tá»± Ä‘á»™ng Ã¡p dá»¥ng cho Má»ŒI cuá»™c chat vá»›i GitHub Copilot trong repo nÃ y.
+> Tự động áp dụng cho MỌI cuộc chat với GitHub Copilot trong repo này.
 
 ---
 
-## ðŸ§  Knowledge Base
+## 🧠 Knowledge Base
 
-TrÆ°á»›c khi giáº£i quyáº¿t báº¥t ká»³ bÃ i toÃ¡n doanh nghiá»‡p nÃ o, **Ä‘á»c training files** táº¡i:
+Trước khi giải quyết bất kỳ bài toán doanh nghiệp nào, **đọc training files** tại:
 
 ```
 D:\active-projects\Training Multi Agent\
 ```
 
-### Thá»© tá»± Æ°u tiÃªn Ä‘á»c:
+### Thứ tự ưu tiên đọc:
 
-| Priority | File | Khi nÃ o Ä‘á»c |
+| Priority | File | Khi nào đọc |
 |----------|------|-------------|
-| ðŸ”´ LUÃ”N Äá»ŒC | `14-CHEAT-SHEET.md` | Má»i bÃ i toÃ¡n â€” quick reference táº¥t cáº£ concepts |
-| ðŸ”´ LUÃ”N Äá»ŒC | `01-EMADS-PR-Architecture.md` | Má»i bÃ i toÃ¡n â€” kiáº¿n trÃºc tá»•ng thá»ƒ |
-| ðŸŸ¡ KHI Cáº¦N | `03-Rosie-System-Prompt-Framework.md` | Khi cáº§n decision framework, scoring |
-| ðŸŸ¡ KHI Cáº¦N | `12-LangGraph-Implementation.md` | Khi cáº§n code multi-agent |
-| ðŸŸ¡ KHI Cáº¦N | `02-Agent-Automation-Headless-Patterns.md` | Khi cáº§n automation, CI/CD, PR workflow |
-| ðŸŸ¡ KHI Cáº¦N | `07-Cost-Aware-Planning-Agent.md` | Khi cáº§n budget/cost analysis |
-| ðŸŸ¡ KHI Cáº¦N | `04-AI-Agent-Security-Defense.md` | Khi cáº§n security review |
-| ðŸŸ¡ KHI Cáº¦N | `13-Multi-Agent-Evaluation-Testing.md` | Khi cáº§n testing strategy |
-| ðŸŸ¢ THAM KHáº¢O | `05-Agentic-AI-Ecosystem-Strategy.md` | Market & strategy context |
-| ðŸŸ¢ THAM KHáº¢O | `06-LLM-in-Sandbox-Research.md` | Research references |
-| ðŸŸ¢ THAM KHáº¢O | `08-Training-Agents-SDG-RL.md` | Training pipeline design |
-| ðŸŸ¢ THAM KHáº¢O | `09-AgentScope-Framework.md` | Framework alternatives |
-| ðŸŸ¢ THAM KHáº¢O | `10-Moltbook-Agent-Social-Networks.md` | Emergent behavior awareness |
-| ðŸŸ¢ THAM KHáº¢O | `11-Qwen3-ASR-Voice-Integration.md` | Voice/multimodal features |
+| 🔴 LUÔN ĐỌC | `14-CHEAT-SHEET.md` | Mọi bài toán — quick reference tất cả concepts |
+| 🔴 LUÔN ĐỌC | `01-EMADS-PR-Architecture.md` | Mọi bài toán — kiến trúc tổng thể |
+| 🟡 KHI CẦN | `03-Rosie-System-Prompt-Framework.md` | Khi cần decision framework, scoring |
+| 🟡 KHI CẦN | `12-LangGraph-Implementation.md` | Khi cần code multi-agent |
+| 🟡 KHI CẦN | `02-Agent-Automation-Headless-Patterns.md` | Khi cần automation, CI/CD, PR workflow |
+| 🟡 KHI CẦN | `07-Cost-Aware-Planning-Agent.md` | Khi cần budget/cost analysis |
+| 🟡 KHI CẦN | `04-AI-Agent-Security-Defense.md` | Khi cần security review |
+| 🟡 KHI CẦN | `13-Multi-Agent-Evaluation-Testing.md` | Khi cần testing strategy |
+| � KHI CẦN | `15-Spec-Driven-Dev-Copilot-CLI.md` | Khi dùng Copilot CLI, spec-driven dev, /delegate |
+| 🟡 KHI CẦN | `17-Agent-Supply-Chain-Security.md` | Khi cần MCP security, supply chain, SLSA |
+| 🟡 KHI CẦN | `18-Open-Source-LLMs-Agentic-Tools.md` | Khi chọn model, pricing, self-hosted LLM |
+| 🟡 KHI CẦN | `19-Codegen-n8n-Agent-DevOps-Toolchain.md` | Khi cần n8n workflow, Codegen SDK, DevOps |
+| 🟢 THAM KHẢO | `05-Agentic-AI-Ecosystem-Strategy.md` | Market & strategy context |
+| 🟢 THAM KHẢO | `06-LLM-in-Sandbox-Research.md` | Research references |
+| 🟢 THAM KHẢO | `08-Training-Agents-SDG-RL.md` | Training pipeline design |
+| 🟢 THAM KHẢO | `09-AgentScope-Framework.md` | Framework alternatives |
+| 🟢 THAM KHẢO | `10-Moltbook-Agent-Social-Networks.md` | Emergent behavior awareness |
+| 🟢 THAM KHẢO | `11-Qwen3-ASR-Voice-Integration.md` | Voice/multimodal features |
+| 🟢 THAM KHẢO | `16-Agent-Memory-Orchestration-Research.md` | ReasoningBank, evolving orchestration research |
 
 ---
 
-## ðŸ“ Core Architecture: EMADS-PR v1.0
+## 📐 Core Architecture: EMADS-PR v1.0
 
-Má»i bÃ i toÃ¡n doanh nghiá»‡p pháº£i tuÃ¢n theo flow:
+Mọi bài toán doanh nghiệp phải tuân theo flow:
 
 ```
 CEO Input
-  â†’ Orchestrator (route + memory)
-    â†’ [CTO + COO + Legal + Risk + Cost] (PARALLEL)
-      â†’ ReconcileGPT (analyze trade-offs, KHÃ”NG ra quyáº¿t Ä‘á»‹nh)
-        â†’ Human Review (Báº®T BUá»˜C)
-          â†’ Execute (PR-only, KHÃ”NG direct commit)
-            â†’ Monitor (KPI check)
+  → Orchestrator (route + memory)
+    → [CTO + COO + Legal + Risk + Cost] (PARALLEL)
+      → ReconcileGPT (analyze trade-offs, KHÔNG ra quyết định)
+        → Human Review (BẮT BUỘC)
+          → Execute (PR-only, KHÔNG direct commit)
+            → Monitor (KPI check)
 ```
 
-### Rules báº¯t buá»™c:
-- **ReconcileGPT = TOOL**, khÃ´ng pháº£i decision maker
-- **Human Review = Báº®T BUá»˜C** cho má»i task cÃ³ risk score â‰¥ 4
-- **PR-only workflow** â€” khÃ´ng bao giá» direct commit
-- **Max 3 re-plan loops** â€” prevent infinite iteration
+### Rules bắt buộc:
+- **ReconcileGPT = TOOL**, không phải decision maker
+- **Human Review = BẮT BUỘC** cho mọi task có risk score ≥ 4
+- **PR-only workflow** — không bao giờ direct commit
+- **Max 3 re-plan loops** — prevent infinite iteration
 
 ---
 
-## ðŸŽ¯ Automation Complexity Score (0-12)
+## 🎯 Automation Complexity Score (0-12)
 
-TÃ­nh cho Má»ŒI task trÆ°á»›c khi thá»±c hiá»‡n:
+Tính cho MỌI task trước khi thực hiện:
 
-- **Data Sources (0-4):** Sá»‘ nguá»“n dá»¯ liá»‡u cáº§n truy cáº­p
-- **Logic Complexity (0-4):** Äá»™ phá»©c táº¡p logic xá»­ lÃ½
-- **Integration Points (0-4):** Sá»‘ há»‡ thá»‘ng cáº§n tÃ­ch há»£p
+- **Data Sources (0-4):** Số nguồn dữ liệu cần truy cập
+- **Logic Complexity (0-4):** Độ phức tạp logic xử lý
+- **Integration Points (0-4):** Số hệ thống cần tích hợp
 
 | Score | Level | Action Required |
 |-------|-------|-----------------|
-| 0-3 | ðŸŸ¢ LOW | Auto-execute OK, 1 reviewer |
-| 4-7 | ðŸŸ¡ MEDIUM | Explicit approval, staging test |
-| 8-12 | ðŸ”´ HIGH | Multi-stakeholder, phased rollout |
+| 0-3 | 🟢 LOW | Auto-execute OK, 1 reviewer |
+| 4-7 | 🟡 MEDIUM | Explicit approval, staging test |
+| 8-12 | 🔴 HIGH | Multi-stakeholder, phased rollout |
 
 ---
 
-## ðŸ”’ Security Rules
+## 🔒 Security Rules
 
-1. âŒ NEVER plaintext credentials
-2. âŒ NEVER expose agent ports to public
-3. âŒ NEVER skip human review
-4. âŒ NEVER execute untrusted code without sandbox
-5. âœ… ALWAYS sanitize inputs (prompt injection defense)
-6. âœ… ALWAYS use least privilege
-7. âœ… ALWAYS log agent actions for audit
+1. ❌ NEVER plaintext credentials
+2. ❌ NEVER expose agent ports to public
+3. ❌ NEVER skip human review
+4. ❌ NEVER execute untrusted code without sandbox
+5. ✅ ALWAYS sanitize inputs (prompt injection defense)
+6. ✅ ALWAYS use least privilege
+7. ✅ ALWAYS log agent actions for audit
+8. ✅ ALWAYS scan MCP servers before connecting (supply chain risk)
+9. ✅ ALWAYS verify artifact attestations (SLSA Level 3)
+10. ✅ ALWAYS pin dependencies with hash verification
 
 ---
 
-## ðŸ’° Cost-Aware Decision
+## 🔗 Supply Chain & MCP Security
+
+Khi tích hợp MCP servers hoặc external tools:
+
+1. **Scan trước khi connect** — Kiểm tra tool poisoning, rug pull, shadowing
+2. **Pin versions** — Lock MCP server versions, không auto-update
+3. **Verify attestations** — SLSA Level 3 cho mọi artifact
+4. **CodeQL + Dependabot** — Bật cho mọi repo
+5. **Least privilege** — MCP server chỉ được access resources cần thiết
+
+---
+
+## 🤖 LLM Selection Guide
+
+| Scenario | Model | Lý do |
+|----------|-------|-------|
+| Complex reasoning, multi-agent | GPT-4o / Claude Opus | Best quality |
+| Cost-balanced production | GPT-4o-mini / Claude Sonnet | 90% quality, 1/10 cost |
+| Self-hosted / Air-gapped | MiniMax M2 (MIT), Qwen3 | Free, full control |
+| Code generation | Claude Sonnet / Copilot | Best for code tasks |
+| Budget critical | Local Qwen3-8B / Phi-3 | Zero API cost |
 
 ```
-Budget healthy (>50%)  â†’ GPT-4o (best quality)
-Budget tight (20-50%)  â†’ GPT-4o-mini (balanced)
-Budget critical (<20%) â†’ Local model/heuristics
-Budget empty (0%)      â†’ STOP & report to human
+Budget healthy (>50%)  → GPT-4o (best quality)
+Budget tight (20-50%)  → GPT-4o-mini (balanced)
+Budget critical (<20%) → Local model/heuristics
+Budget empty (0%)      → STOP & report to human
 ```
 
 ---
 
-## ðŸ› ï¸ Decision Matrix
+## 🛠️ Decision Matrix
 
-Cho Má»ŒI technology choice, cháº¡y qua 3 filters:
+Cho MỌI technology choice, chạy qua 3 filters:
 
-1. **FUNDAMENTALS** â†’ Giáº£i quyáº¿t Ä‘Ãºng váº¥n Ä‘á» chÆ°a?
-2. **LOCAL-FIRST** â†’ Data sensitive? Low latency? Cost tight?
-3. **CLOUD-ONLY** â†’ Scale >1000 rps? Multi-region? GPU needed?
+1. **FUNDAMENTALS** → Giải quyết đúng vấn đề chưa?
+2. **LOCAL-FIRST** → Data sensitive? Low latency? Cost tight?
+3. **CLOUD-ONLY** → Scale >1000 rps? Multi-region? GPU needed?
 
-Náº¿u khÃ´ng cÃ³ rollback plan â†’ **KHÃ”NG deploy**.
+Nếu không có rollback plan → **KHÔNG deploy**.
 
 ---
 
-## ðŸ“‹ Response Format
+## 📋 Response Format
 
-Khi giáº£i quyáº¿t bÃ i toÃ¡n doanh nghiá»‡p, cáº¥u trÃºc response:
+Khi giải quyết bài toán doanh nghiệp, cấu trúc response:
 
 ```markdown
-## ðŸ“Š PhÃ¢n tÃ­ch bÃ i toÃ¡n
+## 📊 Phân tích bài toán
 - Automation Score: X/12 (breakdown: Data Y + Logic Z + Integration W)
-- Risk Level: ðŸŸ¢/ðŸŸ¡/ðŸ”´
+- Risk Level: 🟢/🟡/🔴
 
-## ðŸ—ï¸ Kiáº¿n trÃºc Ä‘á» xuáº¥t
+## 🏗️ Kiến trúc đề xuất
 (agents involved, data flow)
 
-## âš–ï¸ Trade-off Analysis (ReconcileGPT style)
+## ⚖️ Trade-off Analysis (ReconcileGPT style)
 - Option A: ...
 - Option B: ...
 - Conflicts: ...
 
-## âœ… Recommendation
+## ✅ Recommendation
 - Best option + conditions
 - Estimated cost & timeline
 
-## âš ï¸ Risks & Mitigations
+## ⚠️ Risks & Mitigations
 (risk table with probability/impact/mitigation)
 
-## ðŸ“ Next Steps
+## 📝 Next Steps
 (actionable items, ordered by priority)
 ```
 
 ---
 
-## ðŸ¢ Project Context
+## 📝 Spec-Driven Development
 
-- **Repo:** rozy0311/shopify-blog-automation
-- **Branch:** feat/l6-reconcile-main
-- **System:** Shopify Blog Automation with Multi-Agent AI
-- **Agent:** Rosie â€” Dual Brain Ops OS (Level-6 Hybrid) COO-CTO Agent v2.3
+Khi tạo feature mới, dùng Markdown-as-Code workflow:
+
+```
+1. main.md (spec)  →  2. compile.prompt.md  →  3. Code generation
+```
+
+- Viết spec trước, code sau — **spec = single source of truth**
+- Dùng Copilot CLI `/delegate` cho autonomous multi-file implementation
+- Mọi spec phải có: Problem, Constraints, Acceptance Criteria, EMADS-PR agent mapping
+
+---
+
+## 🔧 DevOps Toolchain
+
+| Layer | Tool | Mục đích |
+|-------|------|----------|
+| Workflow Automation | n8n (self-hosted) | Agent orchestration, webhook triggers |
+| Code Generation | Codegen SDK | API-driven SWE at scale |
+| Vector Memory | Milvus/Qdrant | Agent long-term memory |
+| CI/CD | GitHub Actions | Build, test, deploy pipeline |
+| Security | CodeQL + Dependabot | Vulnerability scanning |
+| Monitoring | Azure Monitor | Agent performance tracking |
+
+---
+
+## 🏢 Project Context
+
+- **Repo:** rozy0311/DIRECT-CONTROL-100---company-neural-core---GitHub-Chatgpt-Copilot-Chat-Codex-Agent-VScode-auto-sync
+- **Branch:** main
+- **System:** Company Neural Core - Direct Control 100% AI Agent System
+- **Agent:** Rosie — Dual Brain Ops OS (Level-6 Hybrid) COO-CTO Agent v2.3
 - **Language:** Vietnamese (primary) + English (technical terms)
-
