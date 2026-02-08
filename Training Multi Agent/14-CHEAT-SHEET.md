@@ -239,6 +239,7 @@ Training Multi Agent/
 ├── 17 Supply Chain Security          ⭐⭐⭐⭐⭐ 🆕
 ├── 18 Open-Source LLMs (MiniMax M2)  ⭐⭐⭐⭐⭐ 🆕
 ├── 19 Codegen + n8n + DevOps Tools   ⭐⭐⭐⭐⭐ 🆕
+├── 20 Azure Foundry Agent Service    ⭐⭐⭐⭐⭐ 🆕
 └── README.md                         📋 Master index
 ```
 
@@ -311,4 +312,36 @@ TERMINAL: Copilot CLI (headless + /delegate)
 
 ---
 
-*Last updated: 2026-02-08 | EMADS-PR v1.0 + v1.1 supplements*
+## ☁️ Azure Foundry Agent Service (30 giây)
+
+```
+FOUNDRY AGENT FACTORY — 6 STEPS:
+1. Models        → GPT-4o, Llama, DeepSeek
+2. Customization → Fine-tune, distillation, prompts
+3. Knowledge     → Azure AI Search, SharePoint, Blob
+4. Orchestration → Connected agents (multi-agent)
+5. Observability → App Insights, traces, metrics
+6. Trust         → Entra ID, RBAC, XPIA filters, encryption
+```
+
+**Khi nào dùng Foundry vs Self-Hosted:**
+```
+Scale >1000 rps, multi-region, compliance → Azure Foundry
+Budget tight, full control, single region → Self-hosted (n8n/LangGraph)
+Best of both worlds                      → Hybrid (Foundry + n8n)
+```
+
+**Cisco MCP Scanner — 3 Engines:**
+```
+1. YARA Rules       → Pattern matching (fast, deterministic)
+2. LLM-as-Judge     → Semantic analysis (catches hidden intent)
+3. Cisco AI Defense  → Cloud threat intelligence (updated DB)
+
+Threats detected: Tool Poisoning, Rug Pulls, Shadowing,
+                  Over-privileged Permissions, Cross-Origin Escalation
+GitHub: cisco-ai-defense/mcp-scanner
+```
+
+---
+
+*Last updated: 2026-02-08 | EMADS-PR v1.0 + v1.1 + v1.2 supplements*

@@ -80,7 +80,13 @@
 
 | # | File | Mô tả | Độ quan trọng |
 |---|------|--------|---------------|
-| 17 | [17-Agent-Supply-Chain-Security.md](17-Agent-Supply-Chain-Security.md) | MCP supply chain threats, Cisco MCP Scanner, CodeGuard, CodeQL, Dependabot, SLSA Level 3, artifact attestations | ⭐⭐⭐⭐⭐ |
+| 17 | [17-Agent-Supply-Chain-Security.md](17-Agent-Supply-Chain-Security.md) | MCP supply chain threats, Cisco MCP Scanner (3 engines: Yara/LLM-judge/AI Defense), CodeGuard, CodeQL, Dependabot, SLSA Level 3, artifact attestations | ⭐⭐⭐⭐⭐ |
+
+### Cloud & Enterprise Platform
+
+| # | File | Mô tả | Độ quan trọng |
+|---|------|--------|---------------|
+| 20 | [20-Azure-Foundry-Agent-Service.md](20-Azure-Foundry-Agent-Service.md) | Microsoft Foundry platform, Foundry Agent Service "agent factory" 6-step (Models→Customizability→Knowledge/Tools→Orchestration→Observability→Trust), multi-agent connected agents, enterprise security (Entra ID, RBAC, XPIA), BCDR via Cosmos DB, hybrid architecture Foundry+Self-Hosted | ⭐⭐⭐⭐⭐ |
 
 ### Quick Reference
 
@@ -134,7 +140,10 @@ EMADS-PR v1.0 (Multi-Agent Enterprise System)
 │   └── 18: Open-source LLMs cho agentic tools (MiniMax M2)
 │
 └── 🛡️ SUPPLY CHAIN SECURITY
-    └── 17: MCP Scanner + CodeGuard + SLSA + Attestations
+    └── 17: MCP Scanner (3 engines) + CodeGuard + SLSA + Attestations
+│
+└── ☁️ CLOUD & ENTERPRISE PLATFORM
+    └── 20: Azure Foundry Agent Service (agent factory + hybrid architecture)
 ```
 
 ---
@@ -152,14 +161,15 @@ EMADS-PR v1.0 (Multi-Agent Enterprise System)
 ### Cho developer:
 1. **01** → Architecture overview
 2. **12** → LangGraph implementation (code thực tế) ⭐
-3. **15** → Spec-driven development + Copilot CLI ⭐ **MỚI**
+3. **15** → Spec-driven development + Copilot CLI ⭐
 4. **07** → Cost-aware planning (có code)
 5. **13** → Evaluation & testing ⭐
 6. **02** → Automation patterns (có code)
-7. **19** → Codegen SDK + n8n toolchain ⭐ **MỚI**
-8. **17** → Supply chain security ⭐ **MỚI**
-9. **09** → AgentScope framework (có code)
-10. **14** → 📌 Cheat Sheet
+7. **19** → Codegen SDK + n8n toolchain ⭐
+8. **20** → Azure Foundry Agent Service ⭐ **MỚI**
+9. **17** → Supply chain security ⭐
+10. **09** → AgentScope framework (có code)
+11. **14** → 📌 Cheat Sheet
 
 ### Cho researcher:
 1. **06** → LLM-in-Sandbox paper

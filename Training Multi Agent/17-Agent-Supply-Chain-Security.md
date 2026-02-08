@@ -61,40 +61,112 @@ AI AGENT APP — THÊM ATTACK SURFACE:
 ## 2. Cisco MCP Scanner — Open Source Security Tool
 
 ### 2.1 Overview
-- **Tên:** Cisco MCP Scanner
-- **Mục đích:** Scan MCP servers cho security vulnerabilities
-- **License:** Open Source
-- **Nguồn:** Cisco AI Security Team
+- **Tên:** MCP Scanner (by Cisco)
+- **GitHub:** [`cisco-ai-defense/mcp-scanner`](https://github.com/cisco-ai-defense/mcp-scanner)
+- **Mục đích:** Scan MCP servers cho security vulnerabilities trước khi dùng
+- **License:** Open Source (Apache 2.0)
+- **Nguồn:** Cisco AI Defense Team
 - **Blog:** [Securing the AI Agent Supply Chain](https://blogs.cisco.com/ai/securing-the-ai-agent-supply-chain-with-ciscos-open-source-mcp-scanner)
 
-### 2.2 Scan Categories
+### 2.2 Specific Threats MCP Scanner Detects
 
 ```
-MCP SCANNER CHECKS:
-├─ 1. SERVER IDENTITY
-│     ├─ Verify server authenticity
-│     ├─ Check for typosquatting
-│     └─ Validate certificates
+MCP SCANNER — THREAT DETECTION:
+├─ 1. TOOL POISONING
+│     └─ Malicious instructions hidden in tool descriptions
+│     └─ Tool definitions chứa prompt injection
+│     └─ Hidden commands trong tool schemas
 │
-├─ 2. TOOL SECURITY
-│     ├─ Analyze tool schemas for injection risks
-│     ├─ Check for overprivileged tools
-│     └─ Detect suspicious tool patterns
+├─ 2. RUG PULLS
+│     └─ MCP server thay đổi behavior sau initial approval
+│     └─ Tool definitions thay đổi silently qua updates
+│     └─ Bait-and-switch: safe khi scan → malicious khi dùng
 │
-├─ 3. DATA FLOW
-│     ├─ Identify data exfiltration risks
-│     ├─ Check for sensitive data exposure
-│     └─ Validate input/output sanitization
+├─ 3. TOOL SHADOWING
+│     └─ MCP server overrides/shadows built-in tools
+│     └─ Impersonates trusted tool names
+│     └─ Hijacks existing tool calls
 │
-├─ 4. DEPENDENCY AUDIT
-│     ├─ Scan MCP server dependencies
-│     ├─ Check for known CVEs
-│     └─ Verify package integrity
+├─ 4. OVER-PRIVILEGED PERMISSIONS
+│     └─ Tools yêu cầu quyền quá mức cần thiết
+│     └─ Broad file system access
+│     └─ Unrestricted network access
 │
-└─ 5. CONFIGURATION
-      ├─ Check for secure defaults
-      ├─ Validate access controls
-      └─ Review logging/monitoring setup
+└─ 5. CROSS-ORIGIN ESCALATION
+      └─ MCP server truy cập resources ngoài scope
+      └─ Tool chaining để bypass restrictions
+      └─ Privilege escalation via tool composition
+```
+
+### 2.3 Ba Scanning Engines (Three-Engine Architecture)
+
+```
+┌─────────────────────────────────────────────────┐
+│           MCP SCANNER — 3 ENGINES               │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  ENGINE 1: YARA RULES                           │
+│  ├─ Pattern matching trên tool descriptions     │
+│  ├─ Detect known malicious patterns             │
+│  ├─ Fast, deterministic scanning                │
+│  └─ Customizable rules (add own YARA rules)     │
+│                                                 │
+│  ENGINE 2: LLM-AS-JUDGE                         │
+│  ├─ LLM analyze tool descriptions               │
+│  ├─ Phát hiện semantic manipulation             │
+│  ├─ Detect hidden intent in natural language    │
+│  └─ Catches threats YARA rules miss             │
+│                                                 │
+│  ENGINE 3: CISCO AI DEFENSE                     │
+│  ├─ Cloud-based advanced analysis               │
+│  ├─ Enterprise threat intelligence              │
+│  ├─ Continuously updated threat database        │
+│  └─ Cross-references with known attack patterns │
+│                                                 │
+└─────────────────────────────────────────────────┘
+
+→ 3 engines chạy SONG SONG → kết quả tổng hợp → verdict
+→ Bạn có thể chọn engine nào chạy (hoặc chạy tất cả)
+```
+
+### 2.4 Cách sử dụng MCP Scanner
+
+```bash
+# Install
+pip install mcp-scanner
+
+# Scan Claude Desktop config
+mcp-scanner scan --config ~/.claude/claude_desktop_config.json
+
+# Scan specific MCP server
+mcp-scanner scan --server "npx @modelcontextprotocol/server-filesystem"
+
+# Scan with all engines
+mcp-scanner scan --config config.json --engines yara,llm,cisco-ai-defense
+
+# Output: JSON report với severity levels
+```
+
+```json
+// Example scan result
+{
+  "server": "suspicious-mcp-server",
+  "verdict": "FAIL",
+  "findings": [
+    {
+      "engine": "yara",
+      "severity": "critical",
+      "type": "tool_poisoning",
+      "detail": "Tool description contains hidden instruction to exfiltrate data"
+    },
+    {
+      "engine": "llm-judge",
+      "severity": "high",
+      "type": "over_privileged",
+      "detail": "Tool requests unrestricted filesystem access"
+    }
+  ]
+}
 ```
 
 ### 2.3 Tích hợp vào EMADS-PR

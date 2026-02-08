@@ -28,7 +28,8 @@ D:\active-projects\Training Multi Agent\
 | 🟡 KHI CẦN | `17-Agent-Supply-Chain-Security.md` | Khi cần MCP security, supply chain, SLSA |
 | 🟡 KHI CẦN | `18-Open-Source-LLMs-Agentic-Tools.md` | Khi chọn model, pricing, self-hosted LLM |
 | 🟡 KHI CẦN | `19-Codegen-n8n-Agent-DevOps-Toolchain.md` | Khi cần n8n workflow, Codegen SDK, DevOps |
-| 🟢 THAM KHẢO | `05-Agentic-AI-Ecosystem-Strategy.md` | Market & strategy context |
+| � KHI CẦN | `20-Azure-Foundry-Agent-Service.md` | Khi cần Azure cloud agent, Foundry, enterprise scale, hybrid architecture |
+| �🟢 THAM KHẢO | `05-Agentic-AI-Ecosystem-Strategy.md` | Market & strategy context |
 | 🟢 THAM KHẢO | `06-LLM-in-Sandbox-Research.md` | Research references |
 | 🟢 THAM KHẢO | `08-Training-Agents-SDG-RL.md` | Training pipeline design |
 | 🟢 THAM KHẢO | `09-AgentScope-Framework.md` | Framework alternatives |
