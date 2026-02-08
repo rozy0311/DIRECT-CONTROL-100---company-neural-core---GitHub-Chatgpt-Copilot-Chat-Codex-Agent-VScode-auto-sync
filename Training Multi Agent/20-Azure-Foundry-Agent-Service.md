@@ -36,6 +36,28 @@ Microsoft Foundry (trước đây là Azure AI Foundry) là nền tảng chính 
 - **Model router:** Multi-model orchestration
 - **Datasets & Indexes:** Data management
 
+### ⚠️ Lưu ý chọn Model trên Foundry
+
+```
+AZURE FOUNDRY CHỈ HỖ TRỢ:
+├─ Azure OpenAI: GPT-5, GPT-4.1, GPT-4.1-mini, GPT-4o, o3, o4-mini
+├─ Open-source (Model Catalog): Llama 4, DeepSeek V3, Phi-4, Mistral
+└─ Partner models: xAI Grok, Cohere, AI21
+
+KHÔNG có trên Foundry:
+├─ ❌ Google Gemini 2.5 Pro (chỉ có trên Google Cloud / Vertex AI)
+├─ ❌ Anthropic Claude (chỉ có trên AWS Bedrock / direct API)
+└─ ❌ GitHub Copilot/Codex (tool riêng, không phải deployable model)
+
+KHUYẾN NGHỊ cho EMADS-PR (2026):
+├─ Orchestrator/ReconcileGPT: GPT-5 (best reasoning)
+├─ Specialist agents (CTO/COO/Legal): GPT-4.1 (fast + cheap)
+├─ Budget fallback: Llama 4 / DeepSeek V3 (open-source, self-host OK)
+└─ Code generation tasks: GPT-4.1 (optimized for code)
+
+→ Chi tiết so sánh models: xem File 18-Open-Source-LLMs-Agentic-Tools.md
+```
+
 ---
 
 ## 2. Foundry Agent Service — "Agent Factory"
@@ -47,7 +69,7 @@ Microsoft Foundry (trước đây là Azure AI Foundry) là nền tảng chính 
 │           AI AGENT              │
 ├─────────────────────────────────┤
 │  1. Model (LLM)                │
-│     └─ GPT-4o, GPT-4, Llama   │
+│     └─ GPT-5, GPT-4.1, Llama 4│
 │                                 │
 │  2. Instructions               │
 │     ├─ Prompt-based (single)   │
@@ -65,7 +87,7 @@ Microsoft Foundry (trước đây là Azure AI Foundry) là nền tảng chính 
 ### 6-Step Assembly Line (Agent Factory)
 
 ```
-Step 1: Models          → Chọn LLM (GPT-4o, Llama, etc.)
+Step 1: Models          → Chọn LLM (GPT-5, GPT-4.1, Llama 4, DeepSeek, etc.)
 Step 2: Customizability → Fine-tune, distillation, domain prompts
 Step 3: Knowledge/Tools → Connect enterprise data + actions
 Step 4: Orchestration   → Agent-to-agent messaging, tool calls
@@ -235,9 +257,10 @@ Cosmos DB           → Azure Cosmos DB pricing
 ### Cost-Aware Decision (mở rộng từ File 07):
 
 ```
-Budget healthy (>50%)  → Azure Foundry + GPT-4o (full features)
-Budget tight (20-50%)  → Azure Foundry + GPT-4o-mini (balanced)
-Budget critical (<20%) → Self-hosted n8n + local model
+Budget healthy (>50%)  → Azure Foundry + GPT-5 (best accuracy)
+Budget moderate (30-50%) → Azure Foundry + GPT-4.1 (balanced, fast)
+Budget tight (10-30%)  → Azure Foundry + GPT-4.1-mini / Llama 4 (cheap)
+Budget critical (<10%) → Self-hosted n8n + MiniMax M2 / DeepSeek V3
 Budget empty (0%)      → STOP & report
 ```
 
@@ -265,9 +288,11 @@ client = FoundryClient(
     credential=DefaultAzureCredential()
 )
 
-# Deploy GPT-4o for agent reasoning
+# Deploy model for agent reasoning
+# Chọn theo budget & task (xem File 18 - Model Selection)
+# GPT-5 = best accuracy | GPT-4.1 = fast+cheap | Llama 4 = open-source
 deployment = client.deployments.create(
-    model="gpt-4o",
+    model="gpt-5",        # hoặc "gpt-4.1", "llama-4", "deepseek-v3"
     name="emads-orchestrator"
 )
 ```
@@ -282,8 +307,10 @@ agent_client = AgentClient(
 )
 
 # Tạo CTO Agent
+# Model selection: Orchestrator cần model mạnh (GPT-5),
+# specialist agents có thể dùng GPT-4.1 hoặc Llama 4 để tiết kiệm
 cto_agent = agent_client.agents.create(
-    model="gpt-4o",
+    model="gpt-4.1",    # specialist agent → không cần model đắt nhất
     name="CTO-Agent",
     instructions="""
     Bạn là CTO Agent trong EMADS-PR system.
@@ -300,8 +327,9 @@ cto_agent = agent_client.agents.create(
 ### Step 4: Connected Agents (Multi-Agent)
 ```python
 # Tạo Orchestrator với connected agents
+# Orchestrator = bộ não chính → dùng model mạnh nhất
 orchestrator = agent_client.agents.create(
-    model="gpt-4o",
+    model="gpt-5",      # orchestrator cần reasoning mạnh
     name="EMADS-Orchestrator",
     instructions="Route tasks to specialist agents...",
     tools=[
