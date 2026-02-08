@@ -29,7 +29,7 @@ Microsoft Foundry (trước đây là Azure AI Foundry) là nền tảng chính 
 | **Foundry (new)** | Streamlined, agent-focused | Multi-agent applications |
 
 ### Core capabilities:
-- **Model catalog:** GPT-4o, GPT-4, Llama, DeepSeek, xAI, etc.
+- **Model catalog:** GPT-5, GPT-4.1, Llama 4, DeepSeek V3, xAI Grok, etc.
 - **Evaluations:** Built-in evaluation framework (preview)
 - **Playgrounds:** Test models interactively
 - **Content understanding:** Document processing
@@ -40,7 +40,7 @@ Microsoft Foundry (trước đây là Azure AI Foundry) là nền tảng chính 
 
 ```
 AZURE FOUNDRY CHỈ HỖ TRỢ:
-├─ Azure OpenAI: GPT-5, GPT-4.1, GPT-4.1-mini, GPT-4o, o3, o4-mini
+├─ Azure OpenAI: GPT-5, GPT-4.1, GPT-4.1-mini, o3, o4-mini (legacy: GPT-4o)
 ├─ Open-source (Model Catalog): Llama 4, DeepSeek V3, Phi-4, Mistral
 └─ Partner models: xAI Grok, Cohere, AI21
 
