@@ -44,7 +44,7 @@ from agentscope.agents import ReActAgent
 # Create a ReActAgent with tools
 agent = ReActAgent(
     name="CTO_Agent",
-    model_config_name="gpt-4o",
+    model_config_name="gpt-4.1",  # specialist → fast + cheap
     sys_prompt="""You are a CTO Agent responsible for:
     - Evaluating technical architectures
     - Assessing technology risks
@@ -156,7 +156,7 @@ claude_advocate = DialogAgent(
 gpt_advocate = DialogAgent(
     name="GPT_Advocate", 
     sys_prompt="You advocate for GPT/OpenAI. Present strong arguments.",
-    model_config_name="gpt-4o"
+    model_config_name="gpt-4.1"
 )
 
 judge = DialogAgent(
@@ -164,7 +164,7 @@ judge = DialogAgent(
     sys_prompt="""You are an impartial judge. Evaluate both arguments 
     based on: accuracy, cost, enterprise features, security. 
     Provide final scoring.""",
-    model_config_name="gpt-4o"
+    model_config_name="gpt-5"  # judge needs best reasoning
 )
 
 with msghub(
@@ -257,9 +257,9 @@ import agentscope
 agentscope.init(
     model_configs=[
         {
-            "config_name": "gpt-4o",
+            "config_name": "gpt-4.1",
             "model_type": "openai_chat",
-            "model_name": "gpt-4o",
+            "model_name": "gpt-4.1",
             "api_key": "sk-...",
         },
         {

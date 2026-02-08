@@ -63,10 +63,10 @@ class TestToolExecution:
         """Cost agent's calculation must be accurate"""
         result = calculate_cost(
             tokens=10000,
-            model="gpt-4o",
+            model="gpt-4.1",
             tool_calls=5
         )
-        expected = 0.075  # Known rate
+        expected = 0.056  # Known rate for GPT-4.1
         assert abs(result - expected) < 0.01
 ```
 

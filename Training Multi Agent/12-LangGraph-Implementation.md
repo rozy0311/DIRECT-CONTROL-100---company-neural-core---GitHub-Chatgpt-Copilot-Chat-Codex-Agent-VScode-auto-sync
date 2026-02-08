@@ -93,7 +93,7 @@ class EMADSState(TypedDict):
 ```python
 from langchain_openai import ChatOpenAI
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-5", temperature=0)  # orchestrator → best reasoning
 
 def orchestrator_node(state: EMADSState) -> dict:
     """

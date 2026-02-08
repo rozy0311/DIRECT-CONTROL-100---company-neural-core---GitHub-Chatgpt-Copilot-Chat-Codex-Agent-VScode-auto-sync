@@ -261,13 +261,17 @@ async def execute_step_adaptive(
         # Budget almost depleted → force local
         return execute_local(step)
     
+    elif budget_ratio < 0.3:
+        # Budget tight → open-source fallback
+        return await execute_llm(step, model="llama-4")  # or deepseek-v3
+    
     elif budget_ratio < 0.5:
-        # Budget getting tight → use smaller model
-        return await execute_llm(step, model="gpt-4o-mini")
+        # Budget moderate → fast + cheap
+        return await execute_llm(step, model="gpt-4.1")
     
     else:
-        # Budget healthy → use best model
-        return await execute_llm(step, model="gpt-4o")
+        # Budget healthy → best reasoning
+        return await execute_llm(step, model="gpt-5")
 ```
 
 ---
