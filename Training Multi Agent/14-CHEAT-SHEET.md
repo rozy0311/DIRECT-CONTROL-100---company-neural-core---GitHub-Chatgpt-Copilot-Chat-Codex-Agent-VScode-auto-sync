@@ -64,9 +64,10 @@ CEO Input
 ## 💰 Cost-Aware Planning
 
 ```python
-Budget healthy (>50%)  → GPT-4o (best quality)
-Budget tight (20-50%)  → GPT-4o-mini (balanced)
-Budget critical (<20%) → Local/heuristics (free)
+Budget healthy (>50%)  → GPT-5 (best reasoning)
+Budget moderate (30-50%) → GPT-4.1 (fast + cheap)
+Budget tight (10-30%)  → Llama 4 / DeepSeek V3 (open-source fallback)
+Budget critical (<10%) → Local/heuristics (free)
 Budget empty (0%)      → STOP & report
 ```
 
@@ -275,10 +276,11 @@ Task → Retrieve memories → Execute → Evaluate → Extract insights → Sto
 ## 🤖 Open-Source LLM Selection
 
 ```
-AGENTIC TASKS:    MiniMax M2 ← #1 open-source ($0.30/$1.20 per 1M)
-BUDGET FALLBACK:  DeepSeek V3.2 ($0.28/$0.42)
-ULTRA-BUDGET:     Qwen3 Flash ($0.022/$0.216)
-BEST ACCURACY:    GPT-5 ($1.25/$10.00)
+ORCHESTRATOR:     GPT-5 ($1.25/$10.00) ← best reasoning
+SPECIALIST:       GPT-4.1 ($0.40/$1.60) ← fast + cheap, code-optimized
+OPEN-SOURCE:      MiniMax M2 ($0.30/$1.20) ← #1 open-source agentic
+FALLBACK:         Llama 4 / DeepSeek V3 ($0.28/$0.42) ← self-host OK
+ULTRA-BUDGET:     GPT-4.1-mini / Qwen3 Flash ($0.02/$0.22)
 BEST SAFETY:      Claude Sonnet 4.5 ($3.00/$15.00)
 ```
 
@@ -316,7 +318,7 @@ TERMINAL: Copilot CLI (headless + /delegate)
 
 ```
 FOUNDRY AGENT FACTORY — 6 STEPS:
-1. Models        → GPT-4o, Llama, DeepSeek
+1. Models        → GPT-5, GPT-4.1, Llama 4, DeepSeek V3
 2. Customization → Fine-tune, distillation, prompts
 3. Knowledge     → Azure AI Search, SharePoint, Blob
 4. Orchestration → Connected agents (multi-agent)
