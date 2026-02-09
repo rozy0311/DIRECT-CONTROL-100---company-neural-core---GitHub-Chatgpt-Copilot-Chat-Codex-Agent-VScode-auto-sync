@@ -2,7 +2,7 @@ Cách dùng hiệu quả nhất
 
 ❌ Không cần đính kèm file
 
-Đính kèm 14 files sẽ tốn token context rất lớn và không cần thiết.
+Đính kèm 20+ files sẽ tốn token context rất lớn và không cần thiết.
 
 
 
@@ -29,21 +29,33 @@ D:\\active-projects\\Training Multi Agent\\
 
 
 
-\- Kiến trúc: 01-EMADS-PR-Architecture.md
+\- 🔴 LUÔN ĐỌC: `14-CHEAT-SHEET.md`, `01-EMADS-PR-Architecture.md`
 
-\- Automation: 02-Agent-Automation-Headless-Patterns.md  
+\- 🟡 KHI CẦN:
 
-\- Decision Framework: 03-Rosie-System-Prompt-Framework.md
+\  - `02-Agent-Automation-Headless-Patterns.md` — Automation/CI/CD
 
-\- Security: 04-AI-Agent-Security-Defense.md
+\  - `03-Rosie-System-Prompt-Framework.md` — Decision framework
 
-\- Cost Planning: 07-Cost-Aware-Planning-Agent.md
+\  - `04-AI-Agent-Security-Defense.md` — Security
 
-\- LangGraph: 12-LangGraph-Implementation.md
+\  - `07-Cost-Aware-Planning-Agent.md` — Budget/Cost
 
-\- Testing: 13-Multi-Agent-Evaluation-Testing.md
+\  - `12-LangGraph-Implementation.md` — Code implementation
 
-\- Cheat Sheet: 14-CHEAT-SHEET.md
+\  - `13-Multi-Agent-Evaluation-Testing.md` — Testing
+
+\  - `15-Spec-Driven-Dev-Copilot-CLI.md` — Copilot CLI
+
+\  - `17-Agent-Supply-Chain-Security.md` — MCP/Supply chain
+
+\  - `18-Open-Source-LLMs-Agentic-Tools.md` — Model selection
+
+\  - `19-Codegen-n8n-Agent-DevOps-Toolchain.md` — DevOps
+
+\  - `20-Azure-Foundry-Agent-Service.md` — Azure/Cloud
+
+\- 🟢 THAM KHẢO: `05`, `06`, `08`, `09`, `10`, `11`, `16`
 
 
 
@@ -84,7 +96,7 @@ Tui sẽ tự:
 
 Cách	Hiệu quả	Lý do
 
-Đính kèm 14 files	❌ Lãng phí	Tốn hết context window
+Đính kèm 20+ files	❌ Lãng phí	Tốn hết context window
 
 Gửi path không	⚠️ Được	Tui phải explore, chậm hơn
 

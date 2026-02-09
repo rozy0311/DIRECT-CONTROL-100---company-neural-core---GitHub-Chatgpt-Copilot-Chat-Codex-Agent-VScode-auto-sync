@@ -1,4 +1,5 @@
-﻿# Copilot Instructions — EMADS-PR Enterprise Multi-Agent System
+﻿````instructions
+# Copilot Instructions — EMADS-PR Enterprise Multi-Agent System
 
 > Tự động áp dụng cho MỌI cuộc chat với GitHub Copilot trong repo này.
 
@@ -24,7 +25,7 @@ D:\active-projects\Training Multi Agent\
 | 🟡 KHI CẦN | `07-Cost-Aware-Planning-Agent.md` | Khi cần budget/cost analysis |
 | 🟡 KHI CẦN | `04-AI-Agent-Security-Defense.md` | Khi cần security review |
 | 🟡 KHI CẦN | `13-Multi-Agent-Evaluation-Testing.md` | Khi cần testing strategy |
-| � KHI CẦN | `15-Spec-Driven-Dev-Copilot-CLI.md` | Khi dùng Copilot CLI, spec-driven dev, /delegate |
+| 🟡 KHI CẦN | `15-Spec-Driven-Dev-Copilot-CLI.md` | Khi dùng Copilot CLI, spec-driven dev, /delegate |
 | 🟡 KHI CẦN | `17-Agent-Supply-Chain-Security.md` | Khi cần MCP security, supply chain, SLSA |
 | 🟡 KHI CẦN | `18-Open-Source-LLMs-Agentic-Tools.md` | Khi chọn model, pricing, self-hosted LLM |
 | 🟡 KHI CẦN | `19-Codegen-n8n-Agent-DevOps-Toolchain.md` | Khi cần n8n workflow, Codegen SDK, DevOps |
@@ -104,20 +105,25 @@ Khi tích hợp MCP servers hoặc external tools:
 
 ---
 
-## 🤖 LLM Selection Guide
+## 🤖 LLM Selection Guide (2026)
 
 | Scenario | Model | Lý do |
 |----------|-------|-------|
-| Complex reasoning, multi-agent | GPT-4o / Claude Opus | Best quality |
-| Cost-balanced production | GPT-4o-mini / Claude Sonnet | 90% quality, 1/10 cost |
-| Self-hosted / Air-gapped | MiniMax M2 (MIT), Qwen3 | Free, full control |
-| Code generation | Claude Sonnet / Copilot | Best for code tasks |
-| Budget critical | Local Qwen3-8B / Phi-3 | Zero API cost |
+| Orchestrator / Complex reasoning | GPT-5 | Best quality, multi-agent orchestration |
+| Specialist / Code generation | GPT-4.1 | Optimized for code + tool-use |
+| Cost-balanced production | GPT-4.1-mini / o4-mini | 90% quality, 1/10 cost |
+| Open-source fallback | Llama 4 / DeepSeek V3 | Self-hosted, no API cost |
+| Ultra-budget / Air-gapped | Qwen3 Flash / Phi-4 | Zero API cost, full control |
+
+---
+
+## 💰 Cost-Aware Decision
 
 ```
-Budget healthy (>50%)  → GPT-4o (best quality)
-Budget tight (20-50%)  → GPT-4o-mini (balanced)
-Budget critical (<20%) → Local model/heuristics
+Budget healthy (>50%)  → GPT-5 (orchestrator) + GPT-4.1 (specialist)
+Budget moderate (20-50%) → GPT-4.1-mini / o4-mini (balanced)
+Budget tight (<20%)    → Llama 4 / DeepSeek V3 (open-source)
+Budget critical (<5%)  → Qwen3 Flash / local heuristics
 Budget empty (0%)      → STOP & report to human
 ```
 
@@ -194,8 +200,10 @@ Khi tạo feature mới, dùng Markdown-as-Code workflow:
 
 ## 🏢 Project Context
 
-- **Repo:** rozy0311/DIRECT-CONTROL-100---company-neural-core---GitHub-Chatgpt-Copilot-Chat-Codex-Agent-VScode-auto-sync
+- **Repo:** (your-org/your-repo)
 - **Branch:** main
-- **System:** Company Neural Core - Direct Control 100% AI Agent System
+- **System:** EMADS-PR Enterprise Multi-Agent AI
 - **Agent:** Rosie — Dual Brain Ops OS (Level-6 Hybrid) COO-CTO Agent v2.3
 - **Language:** Vietnamese (primary) + English (technical terms)
+
+````
